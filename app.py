@@ -221,7 +221,7 @@ df_point=df_point.rename(columns={'Lat':'LATITUDE','Lon':'LONGITUDE'})
 df_point=df_point.dropna()
 
 #print(df_point)
-st.title("✔ Newtwork RF Complain Task Attained")
+st.title("✔ Network RF Complain Task Attained ✔")
 st.map(df_point)
 footer="""<style>
 a:link , a:visited{
