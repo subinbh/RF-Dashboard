@@ -3,3 +3,4 @@ plotly==5.9.0
 pandas==2.0.3
 numpy==1.24.3
 plotly_express==0.4.0
+openpyxl==3.0.9
