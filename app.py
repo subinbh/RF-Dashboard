@@ -5,7 +5,7 @@ import numpy as np
 
 
 hide_github_icon = """
-#GithubIcon {
+GithubIcon {
   visibility: hidden;
 }
 """
