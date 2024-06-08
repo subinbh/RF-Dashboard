@@ -3,6 +3,14 @@ import plotly.express as px
 import streamlit as st
 import numpy as np
 
+hide_github_icon = """
+#GithubIcon {
+  visibility: hidden;
+}
+"""
+st.markdown(hide_github_icon, unsafe_allow_html=True)
+
+
 st.set_page_config(page_title="WSD O&M RF  Works Dashboard",
                    page_icon=":bar_chart:",
                    layout="wide"
