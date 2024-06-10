@@ -41,13 +41,14 @@ region = st.sidebar.multiselect(
 
     )
 
+#taskstatus = st.sidebar.multiselect(
+    #"Select The Task Status",
+    #options=df['TaskStatus'].unique(),
+    #default=(df['TaskStatus'].unique())
 
-taskstatus = st.sidebar.multiselect(
-    "Select The Task Status",
-    options=df['TaskStatus'].unique(),
-    default=(df['TaskStatus'].unique())
+   # )
 
-    )
+
 
 df_selection = df.query(
     "TaskCategory == @task_category & TaskType == @task_subcategory & Region == @region"
@@ -93,27 +94,34 @@ drivetestoptimization= sum(df_selection['TaskType']=="Drive Test & Optimization"
 gaddition= sum(df_selection['TaskType']=="2G Addition")
 
 
-left_column,middle_column,right_column,last_column = st.columns(4)
+left_column,middle_column,right_column,last_column,column_5,column_6,column_7 = st.columns(7)
 
 with left_column:
-    st.subheader("Total Tasks")
+    st.subheader("Total")
     st.subheader (f"{total_work}")
 with middle_column:
-    st.subheader("RF Complain")
+    st.subheader("Complain")
     st.subheader (f"{rf_complain}")
 with right_column:
-    st.subheader("OSS Optimization")
+    st.subheader("OSS")
     st.subheader (f"{oss_optimization}")
 with last_column:
-    st.subheader("Coverage Expansion")
+    st.subheader("Coverage ")
     st.subheader (f"{network_coverage_expansion}")
+with column_5:
+    st.subheader("Quality")
+    st.subheader (f"{network_quality_test+network_quality_improvement}")
+
+with column_6:
+    st.subheader("Others")
+    st.subheader (f"{others_work}")
 
 
 #st.markdown("---")
 
 
 data = {'TaskName':['Network RF Complain', 'OSS Optimization', 'Network Coverage Expansion','Network Quality Improvement','Network Quality Test',
-'Others'], 'count':[rf_complain, oss_optimization, network_coverage_expansion,network_quality_test,network_quality_improvement,others_work]}
+'Others'], 'count':[rf_complain, oss_optimization, network_coverage_expansion,network_quality_improvement,network_quality_test,others_work]}
 
 df_for_chart = pd.DataFrame(data)
 df_for_chart.sort_values(by=['count'], ascending=False)
@@ -234,7 +242,7 @@ df_point=df_point.rename(columns={'Lat':'LATITUDE','Lon':'LONGITUDE','Address':'
 df_point=df_point.dropna()
 
 print(df_point)
-st.title("✔ Newtwork RF Complain Task Attained")
+st.title("✔ Newtwork RF Task Attained Map View")
 st.map(df_point)
 
 
