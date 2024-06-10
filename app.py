@@ -3,13 +3,10 @@ import plotly.express as px
 import streamlit as st
 import numpy as np
 
-
-
 st.set_page_config(page_title="WSD O&M RF  Works Dashboard",
                    page_icon=":bar_chart:",
                    layout="wide"
 )
-
 
 df = pd.read_excel(
     io='rfworkdata.xlsx',
@@ -56,9 +53,22 @@ df_selection = df.query(
     "TaskCategory == @task_category & TaskType == @task_subcategory & Region == @region"
 )
 df_selection['Date'] = pd.to_datetime(df_selection['Date'], format='%Y-%m-%d')
+
+start_date = '2024-05-07'
+end_date = '2024-06-10'
+mask = (df_selection['Date'] > start_date) & (df_selection['Date'] <= end_date) 
+  
+df_selection = df_selection.loc[mask] 
+print(df_selection) 
+
+
+
+
+
+
 st.title("📶 WSD O&M RF  Task  Dashboard")
 st.dataframe(df_selection)
-st.title(":bar_chart: WSD O&M RF Summary  of Work ")
+st.title(":bar_chart: WSD O&M  Summary  of RF Work ")
 st.markdown("##")
 # Top KPIS
 total_work = df_selection["TaskCategory"].count()
@@ -126,7 +136,7 @@ plot_bgcolor="rgba(0,0,0,0)",
 xaxis=(dict(showgrid=False))
 )
 
-data_task_subcat= {'TaskType':['High Gain Antenna', 'Repeater', 'Sector Expansion','Small Cell','Drive Test','RF Parameter Optimization','Neighbor Audit','Sector Expansion Survey','Feature Implementation','Drive Test & Optimization','2G Addition','Site Survey'], 'count':[highgainantenna, repeater, sectorexpansion,smallcell,drivetest,rfparameteroptimization,neighboraudit,sectorexpansionsurvey,featureimplementation,drivetestoptimization,gaddition,sitesurvey]}
+data_task_subcat= {'TaskType':['High Gain Antenna', 'Repeater', 'Sector Expansion','Small Cell','Drive Test','RF Parameter Optimization','Neighbor Audit','Feature Implementation','Drive Test & Optimization','2G Addition','Site Survey'], 'count':[highgainantenna, repeater, sectorexpansion,smallcell,drivetest,rfparameteroptimization,neighboraudit,featureimplementation,drivetestoptimization,gaddition,sitesurvey]}
 df_task_subcategory=pd.DataFrame(data_task_subcat)
 
 fig_task_bar_subcat = px.bar(
@@ -219,13 +229,15 @@ fig.update_layout(title = 'RF Work Distribution Map', title_x=0.5)
 
 #st.plotly_chart(fig)
 #map
-df_point = df_selection[['Lat','Lon','TaskType']]
-df_point=df_point.rename(columns={'Lat':'LATITUDE','Lon':'LONGITUDE'})
+df_point = df_selection[['Lat','Lon','TaskType','Address']]
+df_point=df_point.rename(columns={'Lat':'LATITUDE','Lon':'LONGITUDE','Address':'INFO'})
 df_point=df_point.dropna()
 
-#print(df_point)
-st.title("✔ Network RF Complain Task Attained ✔")
+print(df_point)
+st.title("✔ Newtwork RF Complain Task Attained")
 st.map(df_point)
+
+
 footer="""<style>
 a:link , a:visited{
 color: blue;
