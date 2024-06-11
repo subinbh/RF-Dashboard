@@ -242,7 +242,7 @@ df_point=df_point.rename(columns={'Lat':'LATITUDE','Lon':'LONGITUDE','Address':'
 df_point=df_point.dropna()
 
 print(df_point)
-st.title("✔ Newtwork RF Task Attained Map View")
+st.title("✔ Network RF Task Attained Map View")
 st.map(df_point)
 
 
