@@ -57,7 +57,7 @@ df_selection['Date'] = pd.to_datetime(df_selection['Date'], format='%Y-%m-%d')
 
 start_date = '2024-05-07'
 end_date = '2024-06-10'
-mask = (df_selection['Date'] > start_date) & (df_selection['Date'] <= end_date) 
+mask = (df_selection['Date'] >= start_date) & (df_selection['Date'] <= end_date) 
   
 df_selection = df_selection.loc[mask] 
 print(df_selection) 
