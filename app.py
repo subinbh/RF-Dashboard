@@ -244,7 +244,9 @@ print(df_point)
 st.title("✔ Network RF Task Attained Map View")
 st.map(df_point)
 hide_github_icon = """
-
+#GithubIcon {
+  visibility: hidden;
+}
 """
 
 st.markdown(hide_github_icon, unsafe_allow_html=True)
