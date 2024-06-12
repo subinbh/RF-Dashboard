@@ -54,20 +54,20 @@ df_selection = df.query(
     "TaskCategory == @task_category & TaskType == @task_subcategory & Region == @region"
 )
 df_selection['Date'] = pd.to_datetime(df_selection['Date'], format='%Y-%m-%d')
+df_selection = df_selection.sort_values(by='Date')
 
 start_date = '2024-05-07'
 end_date = '2024-06-10'
 mask = (df_selection['Date'] >= start_date) & (df_selection['Date'] <= end_date) 
   
 df_selection = df_selection.loc[mask] 
+df_selection.reset_index(drop=True,inplace=True)
 print(df_selection) 
 
 
-
-
-
-
 st.title("📶 WSD O&M RF  Task  Dashboard")
+
+
 st.dataframe(df_selection)
 st.title(":bar_chart: WSD O&M  Summary  of RF Work ")
 st.markdown("##")
@@ -92,7 +92,6 @@ featureimplementation= sum(df_selection['TaskType']=="Feature Implementation")
 sectorexpansionsurvey= sum(df_selection['TaskType']=="Sector Expansion Survey")
 drivetestoptimization= sum(df_selection['TaskType']=="Drive Test & Optimization")
 gaddition= sum(df_selection['TaskType']=="2G Addition")
-
 
 left_column,middle_column,right_column,last_column,column_5,column_6,column_7 = st.columns(7)
 
@@ -244,6 +243,12 @@ df_point=df_point.dropna()
 print(df_point)
 st.title("✔ Network RF Task Attained Map View")
 st.map(df_point)
+hide_github_icon = """
+
+"""
+
+st.markdown(hide_github_icon, unsafe_allow_html=True)
+
 
 
 footer="""<style>
