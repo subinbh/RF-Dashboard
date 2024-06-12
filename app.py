@@ -243,13 +243,18 @@ df_point=df_point.dropna()
 print(df_point)
 st.title("✔ Network RF Task Attained Map View")
 st.map(df_point)
-hide_github_icon = """
-#GithubIcon {
-  visibility: hidden;
-}
-"""
-
-st.markdown(hide_github_icon, unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    .viewerBadge_text__1JaDK {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 
