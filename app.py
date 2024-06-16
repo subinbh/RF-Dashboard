@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import numpy as np
+from streamlit_extras.metric_cards import style_metric_cards
 
 st.set_page_config(page_title="WSD O&M RF  Works Dashboard",
                    page_icon=":bar_chart:",
@@ -96,25 +97,34 @@ gaddition= sum(df_selection['TaskType']=="2G Addition")
 
 left_column,middle_column,right_column,last_column,column_5,column_6,column_7 = st.columns(7)
 
-with left_column:
-    st.subheader("Total")
-    st.subheader (f"{total_work}")
-with middle_column:
-    st.subheader("Complain")
-    st.subheader (f"{rf_complain}")
-with right_column:
-    st.subheader("OSS")
-    st.subheader (f"{oss_optimization}")
-with last_column:
-    st.subheader("Coverage ")
-    st.subheader (f"{network_coverage_expansion}")
-with column_5:
-    st.subheader("Quality")
-    st.subheader (f"{network_quality_test+network_quality_improvement}")
+left_column.metric(label="Total Tasks",value=total_work)
+middle_column.metric(label="Complain",value=rf_complain)
+right_column.metric(label="OSS",value=oss_optimization)
+last_column.metric(label="Coverage",value=network_coverage_expansion)
+column_5.metric(label="Quality",value=network_quality_improvement+network_quality_test)
+column_6.metric(label="Others",value=others_work)
+style_metric_cards(border_color="#aa8ae5",border_left_color="#dc882f",box_shadow=True,border_size_px=2,border_radius_px=10)
 
-with column_6:
-    st.subheader("Others")
-    st.subheader (f"{others_work}")
+#with left_column:
+    
+   # st.subheader("Total")
+   # st.subheader (f"{total_work}")
+#with middle_column:
+ #   st.subheader("Complain")
+  #  st.subheader (f"{rf_complain}")
+#with right_column:
+ #   st.subheader("OSS")
+  #  st.subheader (f"{oss_optimization}")
+#with last_column:
+ #   st.subheader("Coverage ")
+  #  st.subheader (f"{network_coverage_expansion}")
+#with column_5:
+ #   st.subheader("Quality")
+  #  st.subheader (f"{network_quality_test+network_quality_improvement}")
+
+#with column_6:
+ #   st.subheader("Others")
+  #  st.subheader (f"{others_work}")
 
 
 #st.markdown("---")
@@ -155,6 +165,7 @@ fig_task_bar_subcat = px.bar(
     title="<b> RF Works By Sub Category</b>",
     color_discrete_sequence=['#0083B8']*len(df_task_subcategory),
     template= "plotly_white",
+
     
 
 
@@ -186,10 +197,10 @@ fig_cat_bar = px.pie(df_for_chart, values='count', names='TaskName', title='RF W
 fig_subcat_bar = px.pie(df_task_subcategory, values='count', names='TaskType', title='RF Works By Sub Category')
 
 with left_column:
-        st.plotly_chart(fig_cat_bar)
+        st.plotly_chart(fig_cat_bar,use_container_width=True)
 
 with right_column:
-        st.plotly_chart(fig_subcat_bar)
+        st.plotly_chart(fig_subcat_bar,use_container_width=True)
 
 st.markdown("---")
 
