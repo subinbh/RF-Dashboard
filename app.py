@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import numpy as np
-from streamlit_extras.metric_cards import style_metric_cards
+from streamlit-extras.metric_cards import style_metric_cards
 
 st.set_page_config(page_title="WSD O&M RF  Works Dashboard",
                    page_icon=":bar_chart:",
